@@ -24,7 +24,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className="flex justify-between p-4">
+    <div className="flex justify-between p-4 bg-[#2A2A2A]">
       <div className="flex gap-4 items-center">
         <div>
           <Rocket size={25} color="red" />

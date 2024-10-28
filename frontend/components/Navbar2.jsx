@@ -33,7 +33,7 @@ export default function Navbar2() {
   };
 
   return (
-    <div className="flex justify-between p-4 bg-[#2F3136]">
+    <div className="flex justify-between p-4 bg-[#2A2A2A]">
       <div className="flex gap-4 items-center">
         <div>
           <Rocket size={25} color="red" />
@@ -45,7 +45,13 @@ export default function Navbar2() {
           Courses
         </Link>
         <Link
-          href={"/"}
+          href={"/problems"}
+          className="text-lg font-semibold px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
+        >
+          Problems
+        </Link>
+        <Link
+          href={"/practice"}
           className="text-lg font-semibold px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
         >
           Practice

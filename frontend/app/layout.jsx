@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-[#202225]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-[#1A1A1A]`}
       >
         <ThemeProvider attribute="class">
           <div className="w-full h-screen flex flex-col">

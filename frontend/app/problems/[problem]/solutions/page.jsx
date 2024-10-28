@@ -1,4 +1,4 @@
-import SolutionBox from "@/components/SolutionBox";
+import SolutionBox from "@/components/Problems/SolutionBox";
 import React from "react";
 
 export default function solutions() {

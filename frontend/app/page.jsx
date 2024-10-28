@@ -32,6 +32,7 @@ export default function Page() {
         {data &&
           data.map((item, index) => (
             <Courses
+              key={index}
               course={item.course}
               course_description={item.course_description}
               courses={item.courses}

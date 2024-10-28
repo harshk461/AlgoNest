@@ -9,8 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.1.5",
     "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@react-md/expansion-panel": "^5.1.6",
+    "@react-md/icon": "^5.1.6",
+    "@react-md/list": "^5.1.6",
+    "@react-md/theme": "^5.1.6",
+    "@react-md/typography": "^5.1.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "dotenv": "^16.4.5",
