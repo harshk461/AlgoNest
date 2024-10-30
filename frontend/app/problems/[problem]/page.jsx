@@ -10,5 +10,11 @@ export default function page() {
     router.replace("/problems/" + problem + "/description");
   }, []);
 
-  return <div>page</div>;
+  return (
+    <div className="w-full flex p-4 flex-col gap-4">
+      <div className="w-full p-[30px] rounded-xl animate-pulse bg-primary"></div>
+      <div className="w-full h-[80px] rounded-xl animate-pulse bg-primary"></div>
+      <div className="w-full p-[100px] rounded-xl animate-pulse bg-primary"></div>
+    </div>
+  );
 }

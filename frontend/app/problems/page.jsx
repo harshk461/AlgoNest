@@ -1,11 +1,32 @@
-import Navbar2 from "@/components/Navbar2";
+"use client";
+
+import Navbar2 from "@/components/Others/Navbar2";
 import FilterDropDown from "@/components/Problems/FilterDropDown";
 import QuestionTable from "@/components/Problems/QuestionTable";
 import StudyPlanBox from "@/components/Problems/StudyPlanBox";
 import { Search, Settings, Shuffle } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getAllProblems } from "../functions/problem";
 
 export default function page() {
+  const [questions, setQuestions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const fetchedQuestions = await getAllProblems();
+        setQuestions(fetchedQuestions);
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+
   return (
     <div className="w-full flex flex-col">
       <Navbar2 />
@@ -14,7 +35,7 @@ export default function page() {
           {/* Study Plans */}
           <div className="w-full flex flex-col gap-6">
             <div className="w-full flex justify-between">
-              <h1 className="text-lg ">Study Courses</h1>
+              <h1 className="text-lg font-semibold ">Study Courses</h1>
               <h1 className="text-blue-400 underline text-md">See More</h1>
             </div>
             {/* Courses */}
@@ -67,7 +88,16 @@ export default function page() {
                 </h1>
               </div>
             </div>
-            <QuestionTable />
+            {loading ? (
+              <div className="w-full  flex p-4 flex-col gap-4">
+                <div className="w-full h-[50px] rounded-xl animate-pulse bg-secondary"></div>
+                <div className="w-full h-[50px] rounded-xl animate-pulse bg-secondary"></div>
+                <div className="w-full h-[50px] rounded-xl animate-pulse bg-secondary"></div>
+                <div className="w-full h-[50px] rounded-xl animate-pulse bg-secondary"></div>
+              </div>
+            ) : (
+              <QuestionTable questions={questions} />
+            )}
 
             <div className="w-full flex justify-between items-center">
               <FilterDropDown

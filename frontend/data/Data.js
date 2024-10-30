@@ -1,4 +1,4 @@
-const courses = [
+export const courses = [
   {
     course: "Data Structure and Algorithms",
     course_description:
@@ -52,4 +52,39 @@ const courses = [
   },
 ];
 
-module.exports = courses;
+export const questions = [
+  {
+    question: "Longest Substring Without Repeating Characters",
+    description: [
+      "Given a string s, find the length of the longest substring without repeating characters.",
+    ],
+    difficulty: "easy",
+    acceptance: "54%",
+    testcases: [
+      {
+        input: 's = "abcabcbb"',
+        output: "3",
+        explaination: 'The answer is "abc", with the length of 3.',
+      },
+      {
+        input: 's = "bbbbb"',
+        output: "1",
+        explaination: 'The answer is "b", with the length of 1.',
+      },
+      {
+        input: 's = "pwwkew"',
+        output: "3",
+        explaination:
+          'The answer is "wke", with the length of 3. Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.',
+      },
+    ],
+    constraints: [
+      "0 <= s.length <= 5 * 10^4",
+      "s consists of English letters, digits, symbols and spaces.",
+    ],
+    topics: ["hash table", "string", "sliding window"],
+    hints: [
+      "Generate all possible substrings & check for each substring if it's valid and keep updating maxLen accordingly.",
+    ],
+  },
+];

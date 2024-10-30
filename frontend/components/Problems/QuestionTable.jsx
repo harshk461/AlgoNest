@@ -1,79 +1,9 @@
 import React from "react";
 import { CircleCheckBig, FileVideo, Rocket } from "lucide-react";
+import { capitalize, splitQuestion } from "@/app/functions/Utils";
+import Link from "next/link";
 
-export default function QuestionTable() {
-  const questions = [
-    {
-      status: true,
-      question: "Longest Increasing Subsequence",
-      solution: true,
-      acceptance: "43.6%",
-      difficulty: "Medium",
-    },
-    {
-      status: false,
-      question: "Two Sum",
-      solution: true,
-      acceptance: "45.2%",
-      difficulty: "Easy",
-    },
-    {
-      status: true,
-      question: "Binary Tree Maximum Path Sum",
-      solution: false,
-      acceptance: "28.7%",
-      difficulty: "Hard",
-    },
-    {
-      status: true,
-      question: "Median of Two Sorted Arrays",
-      solution: true,
-      acceptance: "29.1%",
-      difficulty: "Hard",
-    },
-    {
-      status: false,
-      question: "Climbing Stairs",
-      solution: true,
-      acceptance: "47.8%",
-      difficulty: "Easy",
-    },
-    {
-      status: true,
-      question: "Word Break",
-      solution: true,
-      acceptance: "39.5%",
-      difficulty: "Medium",
-    },
-    {
-      status: true,
-      question: "Valid Parentheses",
-      solution: true,
-      acceptance: "57.2%",
-      difficulty: "Easy",
-    },
-    {
-      status: false,
-      question: "Merge Intervals",
-      solution: false,
-      acceptance: "41.6%",
-      difficulty: "Medium",
-    },
-    {
-      status: true,
-      question: "Linked List Cycle",
-      solution: true,
-      acceptance: "49.7%",
-      difficulty: "Easy",
-    },
-    {
-      status: true,
-      question: "Course Schedule",
-      solution: true,
-      acceptance: "40.4%",
-      difficulty: "Medium",
-    },
-  ];
+export default function QuestionTable({ questions }) {
   return (
     <div className="w-full overflow-auto bg-[#1A1A1A]">
       <table className="w-full table-fixed">
@@ -94,20 +24,24 @@ export default function QuestionTable() {
                   font-semibold`}
             >
               <td className="px-4 py-4 text-start">
-                {item.status && <CircleCheckBig color="#6DC177" />}
+                {item.isSolved && <CircleCheckBig color="#6DC177" />}
               </td>
-              <td className="px-4 py-4">{item.question}</td>
+              <td className="px-4 py-4">
+                <Link href={"/problems/" + splitQuestion(item.question)}>
+                  {item.question}
+                </Link>
+              </td>
               <td className="px-4 py-4 text-start">
                 {item.solution && <FileVideo color="purple" />}
               </td>
               <td className="px-4 py-4 text-start">{item.acceptance}</td>
               <td
                 className={`px-4 py-4 text-start
-                    ${item.difficulty === "Medium" && "text-yellow-400"}
-                    ${item.difficulty === "Easy" && "text-green-400"}
-                    ${item.difficulty === "Hard" && "text-red-500"}`}
+                    ${item.difficulty === "medium" && "text-yellow-400"}
+                    ${item.difficulty === "easy" && "text-green-400"}
+                    ${item.difficulty === "hard" && "text-red-500"}`}
               >
-                {item.difficulty}
+                {capitalize(item.difficulty)}
               </td>
             </tr>
           ))}

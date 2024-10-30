@@ -1,12 +1,12 @@
 "use client";
 
-import Courses from "@/components/Courses";
-import Navbar2 from "@/components/Navbar2";
-import ReleaseNotes from "@/components/ReleaseNotes";
+import ReleaseNotes from "@/components/Home/ReleaseNotes";
 import React from "react";
 
-import data from "../data/Data";
-import Footer from "@/components/Footer";
+import { courses } from "@/data/Data";
+import Footer from "@/components/Others/Footer";
+import Navbar2 from "@/components/Others/Navbar2";
+import Courses from "@/components/Home/Courses";
 
 export default function Page() {
   return (
@@ -24,13 +24,12 @@ export default function Page() {
           </button>
         </div>
       </div>
-
       <ReleaseNotes />
       <div className="w-full flex flex-col items-center py-[100px]">
         <h1 className="text-6xl font-bold">Courses</h1>
 
-        {data &&
-          data.map((item, index) => (
+        {courses &&
+          courses.map((item, index) => (
             <Courses
               key={index}
               course={item.course}

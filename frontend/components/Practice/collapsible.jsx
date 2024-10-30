@@ -4,8 +4,13 @@ const Collapsible = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const contentRef = useRef(null);
 
-  const toggleCollapse = () => {
+  const toggleCollapse = ({ title }) => {
     setIsOpen(!isOpen);
+  };
+
+  const capitalizeFirstLetter = (string) => {
+    if (!string) return ""; // Handle empty strings
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
   };
 
   return (
@@ -13,18 +18,18 @@ const Collapsible = ({ title, children }) => {
       <div className="w-full px-4 py-3 flex justify-between items-center border-2 border-[#3d3d3d]  rounded-lg">
         <button
           onClick={toggleCollapse}
-          className="w-full text-left focus:outline-none"
+          className="w-full text-left focus:outline-none text-lg font-semibold"
         >
-          {title}
+          {capitalizeFirstLetter(title)}
         </button>
 
-        <div className="w-full flex gap-4 items-center">
+        {/* <div className="w-full flex gap-4 items-center">
           <div>(7/14)</div>
 
           <div className="w-full h-3 rounded-xl bg-white">
             <div className="w-1/2 h-full rounded-l-xl bg-green-400"></div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div
