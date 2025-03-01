@@ -1,3 +1,4 @@
+import Sidebar from "@/components/Sidebar";
 import "./globals.css";
 
 export const metadata = {
@@ -8,7 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>{children}</body>
+      <body className="w-full h-screen flex">
+        <Sidebar/>
+        {children}
+        </body>
     </html>
   );
 }

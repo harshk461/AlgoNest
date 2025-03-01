@@ -1,7 +1,8 @@
 import React from "react";
 import { CircleCheckBig, FileVideo, Rocket } from "lucide-react";
-import { capitalize, splitQuestion } from "@/app/functions/Utils";
+
 import Link from "next/link";
+import { capitalize, makeQuestionLink } from "app/functions/Utils";
 
 export default function QuestionTable({ questions }) {
   return (
@@ -27,7 +28,7 @@ export default function QuestionTable({ questions }) {
                 {item.isSolved && <CircleCheckBig color="#6DC177" />}
               </td>
               <td className="px-4 py-4">
-                <Link href={"/problems/" + splitQuestion(item.question)}>
+                <Link href={"/problems/" + makeQuestionLink(item.question)}>
                   {item.question}
                 </Link>
               </td>
@@ -37,9 +38,12 @@ export default function QuestionTable({ questions }) {
               <td className="px-4 py-4 text-start">{item.acceptance}</td>
               <td
                 className={`px-4 py-4 text-start
-                    ${item.difficulty === "medium" && "text-yellow-400"}
-                    ${item.difficulty === "easy" && "text-green-400"}
-                    ${item.difficulty === "hard" && "text-red-500"}`}
+                    ${
+                      item.difficulty.toLowerCase() === "medium" &&
+                      "text-yellow-400"
+                    }
+          ${item.difficulty.toLowerCase() === "easy" && "text-green-400"}
+          ${item.difficulty.toLowerCase() === "hard" && "text-red-500"}`}
               >
                 {capitalize(item.difficulty)}
               </td>

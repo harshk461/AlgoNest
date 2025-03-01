@@ -11,7 +11,7 @@ import {
 import Link from "next/link";
 import { onAuthStateChanged } from "firebase/auth";
 import { signOut } from "firebase/auth";
-import { auth } from "@/firebase/firebase";
+import { auth } from "../../firebase/firebase";
 
 export default function Navbar2() {
   const [user, setUser] = useState(null);
@@ -33,38 +33,38 @@ export default function Navbar2() {
   };
 
   return (
-    <div className="flex justify-between p-4 bg-[#2A2A2A]">
-      <div className="flex gap-4 items-center">
+    <div className="flex justify-between px-8 py-2 bg-[#2A2A2A]">
+      <div className="flex gap-2 items-center">
         <div>
           <Rocket size={25} color="red" />
         </div>
         <Link
           href={"/"}
-          className="text-lg font-semibold px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
+          className="text-md px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
         >
           Courses
         </Link>
         <Link
           href={"/problems"}
-          className="text-lg font-semibold px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
+          className="text-md px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
         >
           Problems
         </Link>
         <Link
           href={"/practice"}
-          className="text-lg font-semibold px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
+          className="text-md px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
         >
           Practice
         </Link>
         <Link
           href={"/"}
-          className="text-lg font-semibold px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
+          className="text-md px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
         >
           Roadmap
         </Link>
         <Link
           href={"/"}
-          className="text-lg font-semibold px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
+          className="text-md px-4 py-2 hover:bg-gray-900 rounded-full bg-opacity-40"
         >
           Newsletters
         </Link>

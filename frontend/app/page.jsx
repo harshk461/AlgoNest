@@ -1,12 +1,12 @@
 "use client";
 
-import ReleaseNotes from "@/components/Home/ReleaseNotes";
 import React from "react";
 
-import { courses } from "@/data/Data";
-import Footer from "@/components/Others/Footer";
-import Navbar2 from "@/components/Others/Navbar2";
-import Courses from "@/components/Home/Courses";
+import { courses } from "../data/Data";
+import ReleaseNotes from "../components/Home/ReleaseNotes";
+import Navbar2 from "../components/Others/Navbar2";
+import Footer from "../components/Others/Footer";
+import Courses from "../components/Home/Courses";
 
 export default function Page() {
   return (

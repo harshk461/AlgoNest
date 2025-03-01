@@ -1,5 +1,5 @@
-import Navbar2 from "@/components/Others/Navbar2";
 import React from "react";
+import Navbar2 from "components/Others/Navbar2";
 
 export default function layout({ children }) {
   return (

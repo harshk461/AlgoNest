@@ -5,8 +5,8 @@ import { CiAt, CiLock } from "react-icons/ci";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "@/firebase/firebase";
-import { authenticateUser } from "@/app/functions/auth";
+import { auth, provider } from "../../firebase/firebase";
+import { authenticateUser } from "app/functions/auth";
 
 export default function Signup() {
   const router = useRouter();

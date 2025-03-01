@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 import PracticeCourse from "./PracticeCourse";
 import QuestionCategory from "./QuestionCategory";
-import { questions } from "@/data/Data";
+import { questions } from "data/Data";
+
 export default function PracticeComponent() {
   return (
     <div className="w-full flex flex-col gap-4">

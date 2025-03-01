@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 import { onAuthStateChanged } from "firebase/auth"; // Import for authentication state change
-import { auth } from "@/firebase/firebase";
+import { auth } from "firebase/firebase";
 
 export default function Navbar() {
   const [user, setUser] = useState(null);

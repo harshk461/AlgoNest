@@ -1,7 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],      // Use '@/' as a base path alias for the root directory.
+      "*": ["*"]           // Retain fallback support for direct relative paths.
     }
   }
 }

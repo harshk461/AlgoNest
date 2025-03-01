@@ -1,9 +1,9 @@
 "use client";
 
-import Navbar2 from "@/components/Others/Navbar2";
-import FilterDropDown from "@/components/Problems/FilterDropDown";
-import QuestionTable from "@/components/Problems/QuestionTable";
-import StudyPlanBox from "@/components/Problems/StudyPlanBox";
+import Navbar2 from "/components/Others/Navbar2";
+import FilterDropDown from "/components/Problems/FilterDropDown";
+import QuestionTable from "/components/Problems/QuestionTable";
+import StudyPlanBox from "/components/Problems/StudyPlanBox";
 import { Search, Settings, Shuffle } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { getAllProblems } from "../functions/problem";
@@ -16,6 +16,7 @@ export default function page() {
     const fetchQuestions = async () => {
       try {
         const fetchedQuestions = await getAllProblems();
+        console.log(fetchedQuestions);
         setQuestions(fetchedQuestions);
       } catch (error) {
         console.error("Error fetching questions:", error);

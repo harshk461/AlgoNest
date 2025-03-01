@@ -4,7 +4,7 @@ import { CiAt, CiLock } from "react-icons/ci";
 import React from "react";
 import Link from "next/link";
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "@/firebase/firebase";
+import { auth, provider } from "../../firebase/firebase";
 
 export default function Page() {
   const handleGoogleAuth = async (e) => {

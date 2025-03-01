@@ -17,6 +17,7 @@ export default function Courses({ course, course_description, courses }) {
           <div className="w-[800px] flex flex-wrap gap-4 justify-center items-center">
             {courses.map((item, index) => (
               <CourseBox
+                key={index}
                 course={item.course}
                 course_description={item.course_description}
               />

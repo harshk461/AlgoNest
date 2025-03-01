@@ -1,4 +1,6 @@
-import { firestore } from "@/firebase/firebase";
+"use server"
+
+import { firestore } from "firebase/firebase";
 import {
   collection,
   doc,
@@ -49,8 +51,9 @@ export const getAllProblems = async () => {
 };
 
 export const getProblem = async (question) => {
+  console.log(question);
   const joinedQuestion = joinQuestion(question);
-  console.log(joinedQuestion);
+  // console.log(joinedQuestion);
   const problemsRef = collection(firestore, "problems");
   const q = query(problemsRef, where("question", "==", joinedQuestion));
   const querySnapshot = await getDocs(q);

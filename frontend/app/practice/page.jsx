@@ -1,7 +1,7 @@
 "use client";
 
-import Navbar2 from "@/components/Others/Navbar2";
-import PracticeComponent from "@/components/Practice/practice";
+import Navbar2 from "components/Others/Navbar2";
+import PracticeComponent from "components/Practice/practice";
 import { Menu } from "lucide-react";
 import React, { useRef, useState } from "react";
 
