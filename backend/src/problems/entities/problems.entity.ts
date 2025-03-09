@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Description } from './descriptions.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity({ name: 'problems' })
 export class Problem {
@@ -21,10 +20,8 @@ export class Problem {
   @Column('simple-array')
   sheets: string[];
 
-  @OneToMany(() => Description, (description) => description.problem, {
-    cascade: true, // Automatically manage related descriptions
-  })
-  descriptions: Description[];
+  @Column({ type: 'longtext' })
+  descriptions: string;
 
   @Column('json')
   testcases: {

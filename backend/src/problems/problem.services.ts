@@ -45,10 +45,6 @@ export class ProblemService {
   async addNewProblem(problemDto: ProblemDTO) {
     const newProblem = this.problemRepository.create({
       ...problemDto,
-      descriptions: problemDto.descriptions.map((desc) => ({
-        ...desc,
-        problem: undefined,
-      })),
       testcases: problemDto.testcases.map((tc) => ({
         id: uuidv4(),
         ...tc,

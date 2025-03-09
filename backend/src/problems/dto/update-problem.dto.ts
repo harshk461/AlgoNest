@@ -21,12 +21,6 @@ class TestCaseDto {
   explanation?: any;
 }
 
-class DescriptionDto {
-  @IsNotEmpty()
-  @IsString()
-  text: string;
-}
-
 export class UpdateProblemDTO {
   @IsNotEmpty()
   @IsNumber()
@@ -55,10 +49,8 @@ export class UpdateProblemDTO {
   sheets?: string[];
 
   @IsOptional()
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => DescriptionDto)
-  descriptions?: DescriptionDto[];
+  @IsString()
+  descriptions?: string;
 
   @IsOptional()
   @IsArray()

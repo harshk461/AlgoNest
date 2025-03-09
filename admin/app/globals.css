@@ -5,13 +5,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --secondary: #3c3d37;
+  --secondary: #615FFF;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #181c14;
-    --foreground: #ecdfcc;
+    --background: #111828;
+    --foreground: #fff;
   }
 }
 
@@ -19,6 +19,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  list-style:circle;
 }
 
 /* width */
@@ -36,4 +37,78 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #262626;
   border-radius: 5px;
+}
+
+
+/* Custom styling for Quill toolbar */
+.ql-toolbar {
+  background-color: var(--foreground); /* Light gray background */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Add padding */
+  border: 1px solid #ccc; /* Add border */
+}
+
+/* Customize Quill toolbar buttons */
+.ql-toolbar button {
+  color: black; /* Change text color */
+  border-radius: 4px;
+}
+
+/* On hover */
+.ql-toolbar button:hover {
+  background-color: #e5e7eb; /* Light hover effect */
+}
+
+/* Add to your global CSS file */
+.quill-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Make the container take available space */
+.quill-wrapper .ql-container {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0; /* This is crucial for Firefox */
+}
+
+/* Make sure toolbar has proper styling */
+.quill-wrapper .ql-toolbar {
+  background-color: white;
+}
+
+/* Fix the snow theme container */
+.quill-wrapper .ql-snow.ql-container {
+  border: 1px solid #ccc;
+  border-top: 0;
+}
+
+/* Fix for darkmode if needed */
+.text-white .ql-editor {
+  color: white;
+}
+
+.text-white .ql-toolbar {
+  color: black;
+}
+
+ol {
+  list-style-type: decimal; /* Ordered list numbers */
+  padding-left: 20px;
+}
+
+ul {
+  list-style-type: disc; /* Unordered list bullets */
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 5px; /* Spacing between list items */
+}
+code { 
+  background: var(--background) !important;
+  color: var(--foreground);
+  padding: 2px;
+  border-radius: 5px;
+  margin-right: 4px;
 }

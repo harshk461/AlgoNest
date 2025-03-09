@@ -1,7 +1,6 @@
 "use client";
 import Input from "@/common/Input";
-import MultiSelect from "@/components/Problems/MultipleSelect";
-import SingleSelect from "@/components/Problems/SingleSelect";
+import MultiSelect from "@/components/Common/MultipleSelect";
 import Table from "@/components/TableComponent";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -89,7 +88,7 @@ export default function page() {
   };
 
   return (
-    <div className="w-full flex flex-col p-[50px]">
+    <div className="w-full flex flex-col p-4">
       <div className="w-full flex justify-between">
         <Input
           label={"Problem"}
@@ -114,7 +113,7 @@ export default function page() {
           <MultiSelect
             options={topicOptions}
             className={"bg-secondary rounded-lg text-primary"}
-            placeholder="Select Difficulty"
+            placeholder="Select Topics"
             onChange={setTopics}
           />
         </div>
@@ -123,7 +122,13 @@ export default function page() {
         <Table
           headers={headers}
           data={data}
-          hiddenFields={["testcases", "hints", "constraints", "slug"]}
+          hiddenFields={[
+            "testcases",
+            "hints",
+            "constraints",
+            "slug",
+            "descriptions",
+          ]}
           onView={onView}
         />
       </div>

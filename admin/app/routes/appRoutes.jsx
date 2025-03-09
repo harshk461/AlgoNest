@@ -1,4 +1,10 @@
-import { GitPullRequest, GitPullRequestArrow } from "lucide-react";
+import {
+  GitBranch,
+  GitPullRequest,
+  GitPullRequestArrow,
+  User,
+} from "lucide-react";
+import ProtectedRoute from "@/utils/ProtectedRoute";
 
 const appRoutes = [
   {
@@ -13,6 +19,20 @@ const appRoutes = [
     sideBarProps: {
       displayText: "Add Problem",
       icon: <GitPullRequestArrow />,
+    },
+  },
+  {
+    path: "/approve-problem",
+    sideBarProps: {
+      displayText: "Approve Problem",
+      icon: <GitBranch />,
+    },
+  },
+  {
+    path: "/users",
+    sideBarProps: {
+      displayText: "Users",
+      icon: <User />,
     },
   },
 ];

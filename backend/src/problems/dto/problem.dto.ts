@@ -20,12 +20,6 @@ class TestCaseDto {
   explanation?: string;
 }
 
-class DescriptionDto {
-  @IsNotEmpty()
-  @IsString()
-  text: string;
-}
-
 export class ProblemDTO {
   @IsNotEmpty()
   @IsString()
@@ -48,10 +42,8 @@ export class ProblemDTO {
   @IsString({ each: true })
   sheets: string[];
 
-  @IsArray()
-  @ValidateNested({ each: true })
-  @Type(() => DescriptionDto)
-  descriptions: DescriptionDto[];
+  @IsString()
+  descriptions: string;
 
   @IsArray()
   @ValidateNested({ each: true })
@@ -67,6 +59,6 @@ export class ProblemDTO {
   @IsString()
   slug: string;
 
-  @IsArray()w
+  @IsArray()
   hints: string[];
 }

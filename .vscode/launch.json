@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js Debug (Admin)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "args": ["next", "dev"],
+      "cwd": "${workspaceFolder}/admin",
+      "autoAttachChildProcesses": true,
+      "sourceMaps": true,
+      "console": "integratedTerminal"
+    }
+  ]
+}

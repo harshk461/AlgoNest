@@ -1,5 +1,6 @@
 import Sidebar from "@/components/Sidebar";
 import "./globals.css";
+import { Providers } from "@/store/provider";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,8 +11,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="w-full h-screen flex">
-        <Sidebar/>
-        {children}
+        <Providers>
+          <Sidebar/>
+          {children}
+        </Providers>
         </body>
     </html>
   );

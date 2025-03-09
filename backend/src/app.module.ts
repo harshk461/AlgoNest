@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { User } from './auth/entities/user.entity';
+import { User } from './auth/entities/admin-user.entity';
 import { ProblemsModule } from './problems/problems.module';
 import { UserModule } from './user/user.module';
 
