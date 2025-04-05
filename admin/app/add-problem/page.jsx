@@ -24,7 +24,11 @@ export default function Page() {
   const [descriptions, setDescriptions] = useState([]);
 
   const [tsc, setTsc] = useState({
+<<<<<<< HEAD:admin/app/add-problem/page.jsx
     inputs: [{ key: "", value: "" }], // Ensure this is an array
+=======
+    inputs: [],
+>>>>>>> 2973b12 (new adds):admin/app/problems/add-problem/page.jsx
     output: "",
     explanation: "",
   });
@@ -62,34 +66,46 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const navigate = useRouter();
 
+<<<<<<< HEAD:admin/app/add-problem/page.jsx
+=======
+  const token = useSelector((state) => state.auth.token);
+
+>>>>>>> 2973b12 (new adds):admin/app/problems/add-problem/page.jsx
   const handleAddProblem = async () => {
     try {
       setLoading(true);
       const problemDTO = {
         question: problem,
         acceptance: "N/A",
-        difficulty: difficulty,
-        topics: topics,
+        difficulty,
+        topics,
         sheets: [],
-        descriptions: descriptions,
+        descriptions,
         testcases: testcases.map(({ input, output, explanation }) => ({
           input,
           output,
           explanation: explanation || undefined,
         })),
-        constraints: constraints,
-        slug: slug,
-        hints: hints,
+        constraints,
+        slug,
+        hints,
       };
-      // console.log(problemDTO);
       await axios.post(
         "http://localhost:3090/problems/add-problem",
+<<<<<<< HEAD:admin/app/add-problem/page.jsx
         problemDTO
+=======
+        problemDTO,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+>>>>>>> 2973b12 (new adds):admin/app/problems/add-problem/page.jsx
       );
       navigate.replace("/all-problems");
     } catch (e) {
-      console.log(e);
-      // alert(e.response.data.message);
+      console.error(e);
     } finally {
       setLoading(false);
     }
@@ -97,17 +113,20 @@ export default function Page() {
 
   return (
     <ProtectedRoute allowedRoles={["super-admin"]}>
-      <div className="w-full h-screen flex flex-col">
-        <div className="flex w-full h-full gap-4 p-4 overflow-hidden">
-          <div className="w-full h-full flex flex-col gap-3 overflow-y-auto bg-secondary rounded-xl p-4">
+      <div className="w-full h-screen flex flex-col bg-gray-900 text-gray-200">
+        <Navbar />
+        <div className="flex w-full h-full gap-6 p-6 overflow-hidden">
+          {/* Left Section */}
+          <div className="w-full h-full flex flex-col gap-6 overflow-y-auto bg-gray-800 rounded-lg p-6 shadow-lg">
             {/* Problem Name */}
             <ProblemName problem={problem} setProblem={setProblem} />
-            {/* {Slug} */}
+
+            {/* Slug */}
             <Slug slug={slug} setSlug={setSlug} />
 
             {/* Difficulty */}
             <div className="w-full flex flex-col gap-3">
-              <h1 className="text-lg font-semibold">Difficulty</h1>
+              <h1 className="text-xl font-bold">Difficulty</h1>
               <SingleSelect
                 value={difficulty}
                 setValue={setDifficulty}
@@ -139,9 +158,10 @@ export default function Page() {
               constraints={constraints}
               setConstraints={setConstraints}
             />
+
             {/* Topics */}
             <div className="w-full flex flex-col gap-3">
-              <h1 className="text-lg font-semibold">Topics</h1>
+              <h1 className="text-xl font-bold">Topics</h1>
               <MultipleSelect
                 options={topicOptions}
                 selectedValues={topics}
@@ -157,142 +177,94 @@ export default function Page() {
               setHint={setHint}
               setHints={setHints}
             />
+
+            {/* Add Problem Button */}
             <button
               onClick={handleAddProblem}
-              className="px-8 py-2 rounded-lg bg-background w-fit self-center text-lg font-semibold my-4"
+              className={`px-8 py-2 rounded-lg ${
+                loading ? "bg-gray-700" : "bg-teal-500 hover:bg-teal-600"
+              } text-white font-bold transition-all`}
             >
-              {loading ? "Loading" : "Add Problem"}
+              {loading ? "Loading..." : "Add Problem"}
             </button>
           </div>
 
-          <div className="w-full h-full overflow-y-auto bg-secondary rounded-xl">
-            <div className="flex flex-col gap-4 p-6">
-              <h1 className="text-3xl font-semibold">
-                {problem || "Problem Name..."}
-              </h1>
-              <h1>
+          {/* Right Section */}
+          <div className="w-full h-full overflow-y-auto bg-gray-800 rounded-lg shadow-lg p-6">
+            <div className="flex flex-col gap-6">
+              <h1 className="text-3xl font-bold">{problem || "Problem Name..."}</h1>
+              <p className="text-lg">
                 Problem Link:
-                <span className="px-4 font-semibold">
+                <span className="px-4 font-semibold text-teal-400">
                   {"http://localhost:3000/problem/" + slug}
                 </span>
-              </h1>
+              </p>
               <h1
                 className={`font-bold ${
-                  difficulty.toLowerCase() === "medium" ? "text-yellow-400" : ""
-                } ${
-                  difficulty.toLowerCase() === "easy" ? "text-green-400" : ""
-                } ${difficulty.toLowerCase() === "hard" ? "text-red-500" : ""}`}
+                  difficulty.toLowerCase() === "medium"
+                    ? "text-yellow-400"
+                    : difficulty.toLowerCase() === "easy"
+                    ? "text-green-400"
+                    : difficulty.toLowerCase() === "hard"
+                    ? "text-red-500"
+                    : ""
+                }`}
               >
                 {difficulty ? capitalize(difficulty) : "Difficulty"}
               </h1>
-              <div className="w-full text-[17px] font-[400] flex flex-col gap-3">
-                {/* {descriptions.length > 0 ? (
-                descriptions.map((item, index) => (
-                  <h1 dangerouslySetInnerHTML={{ __html: item }} key={index} />
-                ))
-              ) : (
-                <h1 className="text-lg font-semibold">Add a description...</h1>
-              )} */}
-                <h1 dangerouslySetInnerHTML={{ __html: descriptions }} />
-              </div>
+
+              {/* Descriptions */}
+              <div dangerouslySetInnerHTML={{ __html: descriptions }} />
 
               {/* Testcases */}
-              <div className="w-full flex flex-col gap-8 mt-8">
-                {testcases.map((item, index) => (
-                  <div key={index} className="w-full flex flex-col gap-4">
-                    <h1 className="text-md font-semibold">
-                      Example {index + 1}:
-                    </h1>
-                    <div className="w-full pl-3 flex flex-col gap-4 border-l-2 border-l-[#555454]">
-                      {/* Input Section */}
-                      <div className="flex flex-col gap-2">
-                        <h1 className="font-bold text-white">Input:</h1>
-                        <div className="px-3 py-2 rounded-md flex flex-col gap-2">
-                          {Object.entries(item.input).map(([key, value]) => (
-                            <div key={key} className="flex gap-3">
-                              <span className="font-semibold">{key}:</span>
-                              <span>{String(value)}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Output Section */}
-                      <div className="flex gap-3">
-                        <h1 className="font-bold text-white">Output:</h1>
-                        <span className="text-white">{item.output}</span>
-                      </div>
-
-                      {/* Explanation Section (if exists) */}
-                      {item.explanation && (
-                        <div className="flex gap-3">
-                          <h1 className="font-bold text-white">Explanation:</h1>
-                          <span className="text-white">{item.explanation}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
+              {testcases.map((item, index) => (
+                <div key={index} className="border-l border-teal-500 pl-4">
+                  <p className="font-bold">Example {index + 1}</p>
+                  <p>Input: {JSON.stringify(item.input)}</p>
+                  <p>Output: {item.output}</p>
+                  {item.explanation && (
+                    <p>Explanation: {item.explanation}</p>
+                  )}
+                </div>
+              ))}
 
               {/* Constraints */}
               {constraints.length > 0 && (
-                <div className="flex flex-col gap-4 mt-6">
-                  <h1 className="text-lg font-semibold">Constraints:</h1>
-                  <ul className="list-disc list-inside ml-4 space-y-4">
-                    {constraints.map((item, index) => (
-                      <li key={index}>
-                        <h1 className="bg-background text-foreground inline-block px-3 rounded-lg">
-                          {item}
-                        </h1>
-                      </li>
+                <>
+                  <h2 className="text-xl font-bold">Constraints:</h2>
+                  <ul className="list-disc ml-6">
+                    {constraints.map((constraint, index) => (
+                      <li key={index}>{constraint}</li>
                     ))}
                   </ul>
-                </div>
+                </>
               )}
 
               {/* Topics */}
               {topics.length > 0 && (
-                <div className="w-full border-b-4 border-b-background cursor-pointer px-4">
-                  <div className="flex gap-4 items-center text-[#c9c9c9]">
-                    <Tag />
-                    <h1 className="text-md font-semibold">Topics</h1>
-                  </div>
-                  <div className="flex flex-wrap gap-4 px-4 py-3">
-                    {topics.map((item, index) => (
-                      <div
-                        key={index}
-                        className="px-4 py-1 rounded-full text-[15px] bg-[#353535] hover:text-white"
+                <>
+                  <h2 className="text-xl font-bold">Topics:</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {topics.map((topic) => (
+                      <span
+                        key={topic}
+                        className="px-4 py-2 bg-teal-700 text-white rounded-lg"
                       >
-                        {capitalize(item)}
-                      </div>
+                        {capitalize(topic)}
+                      </span>
                     ))}
                   </div>
-                </div>
+                </>
               )}
 
               {/* Hints */}
               {hints.length > 0 && (
-                <div className="flex flex-col gap-4">
-                  {hints.map((item, index) => (
-                    <div
-                      key={index}
-                      className="w-full border-b-4 border-b-background"
-                    >
-                      <div className="flex px-4">
-                        <div className="flex gap-4 items-center text-[#c9c9c9]">
-                          <Lightbulb />
-                          <h1 className="text-md font-semibold">
-                            Hint {index + 1}
-                          </h1>
-                        </div>
-                      </div>
-                      <div className="flex flex-col text-md">
-                        <h1 className="px-4 py-2">{item}</h1>
-                      </div>
-                    </div>
+                <>
+                  <h2 className="text-xl font-bold">Hints:</h2>
+                  {hints.map((hint, index) => (
+                    <p key={index}>{hint}</p>
                   ))}
-                </div>
+                </>
               )}
             </div>
           </div>

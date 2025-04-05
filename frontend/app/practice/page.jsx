@@ -1,5 +1,6 @@
-"use client";
+import React from 'react'
 
+<<<<<<< HEAD
 import Navbar2 from "components/Others/Navbar2";
 import PracticeComponent from "components/Practice/practice";
 import { Menu } from "lucide-react";
@@ -80,4 +81,10 @@ export default function Page() {
       </div>
     </div>
   );
+=======
+export default function page() {
+  return (
+    <div>page</div>
+  )
+>>>>>>> 2973b12 (new adds)
 }

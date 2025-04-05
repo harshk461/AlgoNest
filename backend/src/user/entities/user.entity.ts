@@ -1,10 +1,11 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+<<<<<<< HEAD
 import {
   IsString,
   IsBoolean,
@@ -23,11 +24,18 @@ enum Gender {
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
+=======
 
-  @Column({ type: 'varchar', length: 255, unique: true })
-  @IsEmail()
+@Entity('users')
+export class UserEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+>>>>>>> 2973b12 (new adds)
+
+  @Column({ unique: true })
   email: string;
 
+<<<<<<< HEAD
   @Column({ type: 'varchar', length: 255 })
   @IsString()
   password: string;
@@ -73,34 +81,50 @@ export class User {
   @Column({ type: 'tinyint', default: 0 })
   @IsBoolean()
   isAdmin: boolean;
+=======
+  @Column({ unique: true })
+  username: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  @IsOptional()
-  @IsString()
-  profilePicture?: string;
+  @Column()
+  password: string;
+>>>>>>> 2973b12 (new adds)
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  @IsOptional()
-  @IsString()
-  bio?: string;
+  @Column()
+  firstName: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  @IsOptional()
-  @IsString()
-  phoneNumber?: string;
+  @Column()
+  lastName: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  @IsOptional()
-  @IsString()
-  linkedin?: string;
+  @Column({ nullable: true })
+  profilePicture: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  @IsOptional()
-  @IsString()
-  github?: string;
+  @Column({ default: false })
+  isEmailVerified: boolean;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
-  @IsOptional()
-  @IsString()
-  twitter?: string;
+  @Column({ nullable: true })
+  emailVerificationToken: string;
+
+  @Column({ nullable: true })
+  passwordResetToken: string;
+
+  @Column({ nullable: true })
+  passwordResetExpires: Date;
+
+  @Column('enum', { enum: ['user', 'admin', 'instructor'], default: 'user' })
+  role: 'user' | 'admin' | 'instructor';
+
+  @Column({ default: true })
+  isActive: boolean;
+
+  @Column({ nullable: true })
+  lastLogin: Date;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

@@ -5,6 +5,13 @@ import { AuthModule } from './auth/auth.module';
 import { User } from './auth/entities/admin-user.entity';
 import { ProblemsModule } from './problems/problems.module';
 import { UserModule } from './user/user.module';
+<<<<<<< HEAD
+=======
+import { RoleModule } from './roles/role.module';
+import { ContestsModule } from './contests/contests.module';
+import { NewsletterModule } from './newsletter/newsletter.module';
+import { RoadmapModule } from './roadmap/roadmap.module';
+>>>>>>> 2973b12 (new adds)
 
 @Module({
   imports: [
@@ -29,6 +36,13 @@ import { UserModule } from './user/user.module';
     AuthModule,
     ProblemsModule,
     UserModule,
+<<<<<<< HEAD
+=======
+    RoleModule,
+    ContestsModule,
+    NewsletterModule,
+    RoadmapModule,
+>>>>>>> 2973b12 (new adds)
   ],
 })
 export class AppModule {}
