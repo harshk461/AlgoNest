@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { IsString, IsBoolean, IsOptional, IsJSON } from 'class-validator';
-
+import { v4 as uuid } from 'uuid';
 enum Gender {
   MALE = 'male',
   FEMALE = 'female',
@@ -16,8 +16,8 @@ enum Gender {
 
 @Entity({ name: 'users' })
 export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string = uuid();
 
   @Column({ unique: true })
   email: string;

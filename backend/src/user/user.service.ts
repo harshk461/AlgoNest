@@ -3,11 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { RawQueries } from 'src/rawQueries/rawQueries';
 import { FindParticularUserDTO } from './dto/find-user.dto';
-import { UserEntity } from './entities/user.entity';
 import { IsNull, Not, Repository } from 'typeorm';
 import { AdminUser } from './entities/admin-user.entity';
 import { CreateAdminUserDto } from './dto/add-admin-user.dto';
-import { Roles } from './entities/role.entity';
+import { Roles } from './entities/roles.entity';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/add-client-user.dto';
 // import { Twilio } from 'twilio';
@@ -29,7 +28,7 @@ export class UserService {
     return users;
   }
 
-  async getUser(userDto: FindParticularUserDTO): Promise<UserEntity[]> {
+  async getUser(userDto: FindParticularUserDTO): Promise<User[]> {
     const query = this.userRepository.createQueryBuilder('user');
 
     if (userDto.id) {
@@ -53,7 +52,7 @@ export class UserService {
   }
 
   async getAllAdminUsers() {
-    const users = await this.rawQueries.getAllAdminUsersQuery();
+    const users = await this.adminUserRepository.find();
 
     return users;
   }
@@ -81,7 +80,7 @@ export class UserService {
     const adminUser = this.adminUserRepository.create(processed_data);
     return await this.adminUserRepository.save(adminUser);
   }
-  async addUser(userDto: CreateUserDto): Promise<UserEntity> {
+  async addUser(userDto: CreateUserDto): Promise<User> {
     const existingUser = await this.userRepository.findOne({
       where: [{ email: userDto.email }, { username: userDto.username }],
     });
@@ -126,7 +125,7 @@ export class UserService {
     await this.userRepository.restore(userId);
   }
 
-  async getAllDeletedClientUsers(): Promise<UserEntity[]> {
+  async getAllDeletedClientUsers(): Promise<User[]> {
     return await this.userRepository.find({
       where: { deletedAt: Not(IsNull()) },
       withDeleted: true,

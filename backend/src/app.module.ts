@@ -31,7 +31,7 @@ import { RoleModule } from './roles/roles.module';
     AuthModule,
     ProblemsModule,
     UserModule,
-    RoleModule,
+    // RoleModule,
     RoadmapModule,
   ],
 })
