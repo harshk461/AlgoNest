@@ -1,7 +1,7 @@
 import { getAllClientUsers } from "@/actions/users/get-client-users";
 import Heading from "@/components/Common/Heading";
 import Wrapper from "@/components/Wrapper";
-import ClientPage from "./ClientPage";
+// import ClientPage from "./ClientPage";
 import FlexWrapper from "@/components/FlexWrapper";
 
 export default async function Page() {
@@ -10,7 +10,7 @@ export default async function Page() {
   return (
    <FlexWrapper>
       <Heading heading={"Client Users"} />
-      <ClientPage initialData={data} headers={headers} />
+      {/* <ClientPage initialData={data} headers={headers} /> */}
     </FlexWrapper>
   );
 }

@@ -2,7 +2,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar2 from "@/components/Others/Navbar2";
 import Footer from "@/components/Others/Footer";
 import { CheckCircle, Lock, ChevronRight, BookOpen, Code, Database, Server, Globe } from "lucide-react";
 import Link from "next/link";
@@ -230,8 +229,6 @@ export default function RoadmapPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <Navbar2 />
-      
       <main className="flex-grow">
         <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
           <div className="text-center mb-12">

@@ -1,11 +1,9 @@
-import Navbar2 from "components/Others/Navbar2";
 import { Plus, Send } from "lucide-react";
 import React from "react";
 
 export default function page() {
   return (
     <div className="w-full flex flex-col">
-      <Navbar2 />
       <div className="w-[1200px] m-auto flex flex-col bg-secondary gap-4">
         <div className="w-full flex justify-between px-4 pt-4">
           <input

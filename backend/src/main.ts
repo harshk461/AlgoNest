@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -8,8 +9,6 @@ async function bootstrap() {
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
-<<<<<<< HEAD
-=======
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -18,7 +17,6 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
->>>>>>> 2973b12 (new adds)
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

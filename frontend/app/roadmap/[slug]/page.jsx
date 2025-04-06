@@ -3,7 +3,6 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Navbar2 from "@/components/Others/Navbar2";
 import Footer from "@/components/Others/Footer";
 import { CheckCircle, Lock, ArrowLeft, BookOpen, ChevronDown, ChevronUp, Globe, Server, Code, Database } from "lucide-react";
 
@@ -87,7 +86,6 @@ export default function SpecificRoadmapPage() {
   if (!roadmap) {
     return (
       <div className="min-h-screen bg-black text-white flex flex-col">
-        <Navbar2 />
         <div className="flex-grow flex items-center justify-center">
           <div className="animate-pulse">Loading roadmap...</div>
         </div>
@@ -100,7 +98,6 @@ export default function SpecificRoadmapPage() {
   
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      <Navbar2 />
       
       <main className="flex-grow">
         <div className="max-w-5xl mx-auto px-4 py-12 sm:px-6 lg:px-8">

@@ -4,8 +4,6 @@ import Link from "next/link";
 import IDE from "@/components/Code-Editor/Code-Editor";
 import { useParams, useRouter } from "next/navigation";
 import { Book, FlaskConical, RotateCcw } from "lucide-react";
-import Problem_Navbar from "@/components/Problems/Problem_Navbar";
-import Navbar2 from "@/components/Others/Navbar2";
 
 export default function ProblemLayout({ children }) {
   const params = useParams();
@@ -13,7 +11,6 @@ export default function ProblemLayout({ children }) {
 
   return (
     <div className="flex flex-col w-full h-screen">
-      <Navbar2 />
 
       <div className="flex w-full flex-grow overflow-y-hidden p-2 gap-2">
         <div className="w-full h-full flex flex-col border-2 border-[#333333] rounded-2xl">

@@ -1,37 +1,26 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-<<<<<<< HEAD
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
 import { RawQueries } from 'src/rawQueries/rawQueries';
 import { FindParticularUserDTO } from './dto/find-user.dto';
-=======
 import { UserEntity } from './entities/user.entity';
 import { IsNull, Not, Repository } from 'typeorm';
-import { RawQueries } from 'src/rawQueries/rawQueries';
-import { FindParticularUserDTO } from './dto/find-user.dto';
 import { AdminUser } from './entities/admin-user.entity';
 import { CreateAdminUserDto } from './dto/add-admin-user.dto';
 import { Roles } from './entities/role.entity';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/add-client-user.dto';
 // import { Twilio } from 'twilio';
->>>>>>> 2973b12 (new adds)
 
 @Injectable()
 export class UserService {
   constructor(
-<<<<<<< HEAD
     @InjectRepository(User)
     private userRepository: Repository<User>,
-=======
-    @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>,
     @InjectRepository(AdminUser)
     private adminUserRepository: Repository<AdminUser>,
     @InjectRepository(Roles)
     private roleRepository: Repository<Roles>,
->>>>>>> 2973b12 (new adds)
     private readonly rawQueries: RawQueries,
   ) {}
   async getAllUsers() {
@@ -62,8 +51,6 @@ export class UserService {
 
     return query.getMany();
   }
-<<<<<<< HEAD
-=======
 
   async getAllAdminUsers() {
     const users = await this.rawQueries.getAllAdminUsersQuery();
@@ -145,5 +132,4 @@ export class UserService {
       withDeleted: true,
     });
   }
->>>>>>> 2973b12 (new adds)
 }

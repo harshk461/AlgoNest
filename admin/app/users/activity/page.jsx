@@ -1,10 +1,9 @@
 import { getAllClientUsers } from "@/actions/users/get-client-users";
 import Heading from "@/components/Common/Heading";
 import React from "react";
-import ClientTable from "../ClientTable";
-import LogsModal from "./LogsModal";
-import Wrapper from "@/components/Wrapper";
+
 import FlexWrapper from "@/components/FlexWrapper";
+import ClientTable from "@/components/ClientTable";
 
 export default async function page() {
   const { data, headers } = await getAllClientUsers({});

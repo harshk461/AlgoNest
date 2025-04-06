@@ -10,8 +10,6 @@ import useAuthStatus from "@/hooks/useAuthStatus";
 import { Sun } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { logout } from "@/store/slices/authSlice";
-<<<<<<< HEAD
-=======
 import problemRoutes from "@/app/routes/problemRoutes";
 import adminRoutes from "@/app/routes/adminRoutes";
 import userRoutes from "@/app/routes/userRoutes";
@@ -20,7 +18,6 @@ import analyticsRoutes from "@/app/routes/analyticsRoutes";
 import submissionRoutes from "@/app/routes/submissionsRoutes";
 import systemRoutes from "@/app/routes/systemRoutes";
 import roadmapRoutes from "@/app/routes/roadmapRoutes";
->>>>>>> 2973b12 (new adds)
 
 export default function Sidebar() {
   const path = usePathname();
@@ -48,15 +45,6 @@ export default function Sidebar() {
 
   const { isAuthenticated } = useAuthStatus();
 
-<<<<<<< HEAD
-  if (!mounted) return null; // Prevent hydration error by delaying rendering
-
-  return (
-    <div className="h-screen w-[300px] bg-secondary flex flex-col">
-      <h1 className="text-xl font-bold text-center py-4">AlgoNest</h1>
-
-      <div className="w-full p-4 flex justify-between items-center border-y-2 border-y-foreground">
-=======
   const routes = [
     { label: "Admin", routes: adminRoutes },
     { label: "Problems", routes: problemRoutes },
@@ -80,7 +68,6 @@ export default function Sidebar() {
 
       {/* User Section */}
       <div className="w-full flex justify-between items-center px-4 py-4 border-b border-gray-700">
->>>>>>> 2973b12 (new adds)
         {isAuthenticated ? (
           <Dropdown items={items}>
             <UserItem name={"Harsh"} />
@@ -95,20 +82,6 @@ export default function Sidebar() {
         )}
       </div>
 
-<<<<<<< HEAD
-      {appRoutes.map((item, index) => (
-        <Link
-          href={item.path}
-          key={index}
-          className={`w-full flex px-4 py-3 justify-evenly
-            hover:bg-red
-            ${path == item.path ? "" : ""}`}
-        >
-          <div>{item.sideBarProps.icon}</div>
-          <div className="">{item.sideBarProps.displayText}</div>
-        </Link>
-      ))}
-=======
       {/* Navigation Links */}
       <div className="overflow-y-auto mt-4">
         {routes.map((item, index) => (
@@ -133,7 +106,6 @@ export default function Sidebar() {
           </div>
         ))}
       </div>
->>>>>>> 2973b12 (new adds)
     </div>
   );
 }
