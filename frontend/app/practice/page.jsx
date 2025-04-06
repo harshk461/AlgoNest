@@ -130,7 +130,7 @@ export default function Page() {
 
   return (
     <div
-      className={`flex-1 h-full flex flex-col gap-6 p-6 transition-all duration-500 ease-out ${
+      className={`bg-black flex-1 h-full flex flex-col gap-6 p-6 transition-all duration-500 ease-out ${
         animateIn ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >

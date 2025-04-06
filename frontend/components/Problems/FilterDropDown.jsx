@@ -25,32 +25,35 @@ export default function Dropdown({ title, options }) {
   }, []);
 
   return (
-    <div
-      className="relative inline-block text-left rounded-lg bg-secondary"
-      ref={dropdownRef}
-    >
+    <div className="relative inline-block text-left" ref={dropdownRef}>
       <div
         onClick={toggleDropdown}
-        className="flex items-center px-4 py-2 gap-4"
+        className="flex items-center gap-2 px-4 py-2.5 bg-[#1A1A24] border border-gray-800 rounded-lg cursor-pointer hover:bg-[#2A2A36] transition-colors"
       >
-        <button className="text-lg font-medium text-txt_primary">
-          {title}
-        </button>
-
-        {isOpen ? <ChevronUp /> : <ChevronDown />}
+        <span className="text-gray-300 font-medium">{title}</span>
+        {isOpen ? (
+          <ChevronUp size={18} className="text-gray-400" />
+        ) : (
+          <ChevronDown size={18} className="text-gray-400" />
+        )}
       </div>
 
       {/* Dropdown Menu */}
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-fit origin-top-right bg-secondary rounded-md shadow-lg shadow-black">
-          <ul className="p-2">
+        <div className="absolute left-0 z-10 mt-2 w-fit min-w-full origin-top-right bg-[#1A1A24] rounded-lg border border-gray-800 shadow-lg overflow-hidden">
+          <ul className="py-1">
             {options.map((item, index) => (
               <li
                 key={index}
-                className={`px-6 py-2 text-lg font-normal bg-secondary cursor-pointer hover:bg-[#454444] rounded-lg
-                  ${item == "Easy" && "text-green-500"}
-                  ${item == "Medium" && "text-yellow-500"}
-                  ${item == "Hard" && "text-red-500"}`}
+                className={`px-4 py-2 text-sm cursor-pointer hover:bg-[#2A2A36] transition-colors
+                  ${item === "Easy" ? "text-green-400" : ""}
+                  ${item === "Medium" ? "text-yellow-400" : ""}
+                  ${item === "Hard" ? "text-red-400" : ""}
+                  ${
+                    !["Easy", "Medium", "Hard"].includes(item)
+                      ? "text-gray-300"
+                      : ""
+                  }`}
               >
                 {item}
               </li>

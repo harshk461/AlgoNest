@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
+    "axios": "^1.8.4",
     "clsx": "^2.1.1",
     "dockerode": "^4.0.4",
     "dotenv": "^16.4.5",

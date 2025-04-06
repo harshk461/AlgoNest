@@ -1,3 +1,5 @@
+// app/layout.js or wherever your RootLayout is defined
+
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
@@ -27,10 +29,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-[#000]`}
       >
         <ThemeProvider attribute="class">
-          <div className="w-full h-screen flex flex-col">
+          <div className="min-h-screen flex flex-col">
             <Navbar2 />
-            <div className="flex-1 w-full h-full">{children}</div>
-            <Footer />
+            <main className="flex-1">{children}</main>
+            {/* <Footer /> */}
           </div>
         </ThemeProvider>
       </body>
