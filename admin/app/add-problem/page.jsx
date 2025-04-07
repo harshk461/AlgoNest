@@ -24,11 +24,7 @@ export default function Page() {
   const [descriptions, setDescriptions] = useState([]);
 
   const [tsc, setTsc] = useState({
-<<<<<<< HEAD:admin/app/add-problem/page.jsx
     inputs: [{ key: "", value: "" }], // Ensure this is an array
-=======
-    inputs: [],
->>>>>>> 2973b12 (new adds):admin/app/problems/add-problem/page.jsx
     output: "",
     explanation: "",
   });
@@ -66,11 +62,8 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const navigate = useRouter();
 
-<<<<<<< HEAD:admin/app/add-problem/page.jsx
-=======
   const token = useSelector((state) => state.auth.token);
 
->>>>>>> 2973b12 (new adds):admin/app/problems/add-problem/page.jsx
   const handleAddProblem = async () => {
     try {
       setLoading(true);
@@ -92,16 +85,12 @@ export default function Page() {
       };
       await axios.post(
         "http://localhost:3090/problems/add-problem",
-<<<<<<< HEAD:admin/app/add-problem/page.jsx
-        problemDTO
-=======
         problemDTO,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
->>>>>>> 2973b12 (new adds):admin/app/problems/add-problem/page.jsx
       );
       navigate.replace("/all-problems");
     } catch (e) {
@@ -192,7 +181,9 @@ export default function Page() {
           {/* Right Section */}
           <div className="w-full h-full overflow-y-auto bg-gray-800 rounded-lg shadow-lg p-6">
             <div className="flex flex-col gap-6">
-              <h1 className="text-3xl font-bold">{problem || "Problem Name..."}</h1>
+              <h1 className="text-3xl font-bold">
+                {problem || "Problem Name..."}
+              </h1>
               <p className="text-lg">
                 Problem Link:
                 <span className="px-4 font-semibold text-teal-400">
@@ -222,9 +213,7 @@ export default function Page() {
                   <p className="font-bold">Example {index + 1}</p>
                   <p>Input: {JSON.stringify(item.input)}</p>
                   <p>Output: {item.output}</p>
-                  {item.explanation && (
-                    <p>Explanation: {item.explanation}</p>
-                  )}
+                  {item.explanation && <p>Explanation: {item.explanation}</p>}
                 </div>
               ))}
 
