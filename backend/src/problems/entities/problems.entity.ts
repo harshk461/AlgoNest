@@ -1,42 +1,60 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+} from 'typeorm';
+import { v4 } from 'uuid';
 
-@Entity({ name: 'problems' })
+@Entity('problems')
 export class Problem {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string = v4();
 
-  @Column()
+  @Column({ type: 'varchar', length: 255 })
   question: string;
-
-  @Column()
-  acceptance: string;
-
-  @Column()
-  difficulty: string;
-
-  @Column('simple-array')
-  topics: string[];
-
-  @Column('simple-array')
-  sheets: string[];
 
   @Column({ type: 'longtext' })
   descriptions: string;
 
-  @Column('json')
-  testcases: {
-    id: string;
-    input: Record<string, any>;
-    output: any;
-    explanation?: any;
-  }[];
+  @Column({ type: 'varchar', length: 255 })
+  acceptance: string;
 
-  @Column('simple-array')
-  constraints: string[];
+  @Column({ type: 'varchar', length: 255 })
+  difficulty: string;
 
-  @Column()
+  @Column({ type: 'text' })
+  topics: string;
+
+  @Column({ type: 'text' })
+  sheets: string;
+
+  @Column({ type: 'json' })
+  testcases: any;
+
+  @Column({ type: 'text' })
+  constraints: string;
+
+  @Column({ type: 'varchar', length: 255 })
   slug: string;
 
-  @Column('simple-array')
-  hints: string[];
+  @Column({ type: 'text' })
+  hints: string;
+
+  @Column({ type: 'int', default: 0 })
+  is_approved: number;
+
+  @Column({ type: 'int', default: 0 })
+  is_enabled: number;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @DeleteDateColumn()
+  deleted_at: Date;
 }

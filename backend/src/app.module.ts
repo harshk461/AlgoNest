@@ -6,7 +6,7 @@ import { User } from './auth/entities/admin-user.entity';
 import { ProblemsModule } from './problems/problems.module';
 import { UserModule } from './user/user.module';
 import { RoadmapModule } from './roadmap/roadmap.module';
-import { RoleModule } from './roles/roles.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -31,8 +31,8 @@ import { RoleModule } from './roles/roles.module';
     AuthModule,
     ProblemsModule,
     UserModule,
-    // RoleModule,
     RoadmapModule,
+    AdminModule,
   ],
 })
 export class AppModule {}

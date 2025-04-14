@@ -1,6 +1,6 @@
 import React from "react";
 
-const Table = ({ headers, data, onView, hiddenFields = [] }) => {
+const Table = ({ headers, data, hiddenFields = [],actionButtons }) => {
   return (
     <div className="w-full overflow-x-auto rounded-2xl shadow-2xl backdrop-blur-lg bg-gradient-to-br from-gray-900/80 to-blue-900/30 border border-gray-700/30">
       <div className="relative min-w-full align-middle p-4">

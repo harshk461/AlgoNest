@@ -1,30 +1,23 @@
+import {
+  Home,
+  Users,
+  ShieldCheck,
+  ClipboardList
+} from "lucide-react";
+
 const adminRoutes = [
   {
-    path: "/admin/dashboard",
-    sideBarProps: {
-      displayText: "Dashboard",
-      icon: "Home",
-    },
-  },
-  {
-    path: "/admin/manage-users",
-    sideBarProps: {
-      displayText: "Manage Users",
-      icon: "Users",
-    },
-  },
-  {
-    path: "/admin/roles-permissions",
+    path: "/admin/all-roles",
     sideBarProps: {
       displayText: "Roles & Permissions",
-      icon: "ShieldCheck",
+      icon: <ShieldCheck />,
     },
   },
   {
-    path: "/admin/audit-logs",
+    path: "/admin/add-role",
     sideBarProps: {
-      displayText: "Audit Logs",
-      icon: "ClipboardList",
+      displayText: "Add Role",
+      icon: <ClipboardList />,
     },
   },
 ];

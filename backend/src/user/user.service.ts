@@ -6,7 +6,7 @@ import { FindParticularUserDTO } from './dto/find-user.dto';
 import { IsNull, Not, Repository } from 'typeorm';
 import { AdminUser } from './entities/admin-user.entity';
 import { CreateAdminUserDto } from './dto/add-admin-user.dto';
-import { Roles } from './entities/roles.entity';
+import { Roles } from '../admin/entity/role.entity';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/add-client-user.dto';
 // import { Twilio } from 'twilio';

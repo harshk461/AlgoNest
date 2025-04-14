@@ -15,14 +15,14 @@ export default async function page() {
         headers={headers}
         hiddenFields={["metadata", "password", "updatedAt", "bio"]}
         socials={["linkedin", "github", "instagram", "twitter"]}
-        actionButtons={(row) => [ViewLogs(row)]}
+        actionButtons={(row) => [<ViewLogs row={row}/>]}
       />
       {/* <LogsModal /> */}
     </FlexWrapper>
   );
 }
 
-const ViewLogs = (row) => {
+const ViewLogs = ({row}) => {
   return (
     <button className="px-4 py-2 rounded-lg border border-green-500 text-green-500 font-semibold">
       View Logs

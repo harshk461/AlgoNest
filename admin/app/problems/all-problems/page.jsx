@@ -2,9 +2,9 @@
 import Input from "@/common/Input";
 import MultiSelect from "@/components/Common/MultipleSelect";
 import Table from "@/components/TableComponent";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import problemService from "../actions/ProblemsService";
 
 export default function page() {
   const navigate = useRouter();
@@ -46,34 +46,23 @@ export default function page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3090/problems/all-problems",
-          {
-            params: {
-              problem: problem || "",
-              difficulty: difficulty.length > 0 ? difficulty : "",
-              topics: topics.length > 0 ? topics : "",
-            },
-            paramsSerializer: (params) => {
-              return new URLSearchParams(params).toString();
-            },
-          }
-        );
+        const responseData = await problemService.getAllProblems({
+          problem,
+          difficulty,
+          topics,
+        });
 
-        if (response.data.length == 0) {
+        if (responseData.length === 0) {
           setHeaders([]);
           setData([]);
-        }
-
-        if (response.data.length > 0) {
-          console.log(response.data);
-          const extractedHeaders = Object.keys(response.data[0]).map((key) => ({
+        } else {
+          const extractedHeaders = Object.keys(responseData[0]).map((key) => ({
             key,
             label: key.toUpperCase(),
           }));
 
           setHeaders(extractedHeaders);
-          setData(response.data);
+          setData(responseData);
         }
       } catch (error) {
         console.error("Error fetching problems:", error);

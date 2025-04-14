@@ -1,16 +1,22 @@
-// Modified components for testcase input with key-value pairs
 import React from "react";
 
-// This component manages a single key-value pair
-function KeyValueInput({ keyName, value, onChange, onRemove }) {
+// Modified KeyValueInput component with Type
+function KeyValueInput({ keyName, type, value, onChange, onRemove }) {
   return (
     <div className="flex gap-2 items-center">
       <input
         type="text"
         placeholder="Key"
-        className="px-4 py-2 bg-background rounded-lg text-foreground outline-none w-1/3"
+        className="px-4 py-2 bg-background rounded-lg text-foreground outline-none w-1/4"
         value={keyName}
         onChange={(e) => onChange("key", e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Type (e.g., vector<int>)"
+        className="px-4 py-2 bg-background rounded-lg text-foreground outline-none w-1/4"
+        value={type}
+        onChange={(e) => onChange("type", e.target.value)}
       />
       <input
         type="text"
@@ -29,17 +35,15 @@ function KeyValueInput({ keyName, value, onChange, onRemove }) {
   );
 }
 
-// Component that accepts tsc and testcases as props
+// Updated TestcaseInputSection with type support
 export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
-  // Add a new key-value input field
   const addKeyValuePair = () => {
     setTsc((prev) => ({
       ...prev,
-      inputs: [...prev.inputs, { key: "", value: "" }],
+      inputs: [...prev.inputs, { key: "", type: "", value: "" }],
     }));
   };
 
-  // Handle changes to input key-value pairs
   const handleInputChange = (index, field, value) => {
     const newInputs = [...tsc.inputs];
     newInputs[index][field] = value;
@@ -49,7 +53,6 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
     }));
   };
 
-  // Remove a key-value pair
   const removeKeyValuePair = (index) => {
     if (tsc.inputs.length > 1) {
       const newInputs = tsc.inputs.filter((_, i) => i !== index);
@@ -60,20 +63,22 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
     }
   };
 
-  // Add the current testcase to the list
   const addTestcase = () => {
-    // Validate inputs
-    const isValid =
-      tsc.inputs.every(
-        (input) => input.key.trim() !== "" && input.value.trim() !== ""
-      ) && tsc.output.trim() !== "";
+    const isValid = tsc.inputs.every(
+      (input) =>
+        input.key.trim() !== "" &&
+        input.value.trim() !== "" &&
+        input.type.trim() !== ""
+    ) && tsc.output.trim() !== "";
 
     if (!isValid) return;
 
-    // Format inputs as an object
     const inputObj = {};
     tsc.inputs.forEach((input) => {
-      inputObj[input.key.trim()] = input.value.trim();
+      inputObj[input.key.trim()] = {
+        type: input.type.trim(),
+        value: input.value.trim(),
+      };
     });
 
     const newTestcase = {
@@ -86,7 +91,7 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
 
     // Reset the form
     setTsc({
-      inputs: [{ key: "", value: "" }],
+      inputs: [{ key: "", type: "", value: "" }],
       output: "",
       explanation: "",
     });
@@ -96,7 +101,6 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
     <div className="w-full flex flex-col gap-3">
       <h1 className="text-lg font-semibold">Testcases</h1>
 
-      {/* Input section */}
       <div className="w-full my-2 flex flex-col gap-3">
         <div className="flex justify-between items-center">
           <h1 className="text-lg font-semibold">Input</h1>
@@ -113,6 +117,7 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
             <KeyValueInput
               key={index}
               keyName={input.key}
+              type={input.type}
               value={input.value}
               onChange={(field, value) =>
                 handleInputChange(index, field, value)
@@ -123,7 +128,6 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
         </div>
       </div>
 
-      {/* Output section */}
       <div className="w-full my-2 flex flex-col gap-2">
         <h1 className="text-lg font-semibold">Output</h1>
         <input
@@ -137,7 +141,6 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
         />
       </div>
 
-      {/* Explanation section */}
       <div className="w-full my-2 flex flex-col gap-2">
         <h1 className="text-lg font-semibold">Explanation (Optional)</h1>
         <input
@@ -151,7 +154,6 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
         />
       </div>
 
-      {/* Add button */}
       <button
         onClick={addTestcase}
         className="h-full self-end px-6 py-2 rounded-lg bg-background text-lg font-semibold"
@@ -159,7 +161,6 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
         Add Testcase
       </button>
 
-      {/* Display current testcases */}
       {testcases.length > 0 && (
         <div className="mt-4 p-4 bg-background rounded-lg">
           <h2 className="text-lg font-semibold mb-2">Current Testcases:</h2>
@@ -171,7 +172,7 @@ export function TestcaseInputSection({ tsc, setTsc, testcases, setTestcases }) {
               <div className="font-semibold">Example {idx + 1}</div>
               <div>
                 <span className="font-medium">Input: </span>
-                {JSON.stringify(tc.input)}
+                {JSON.stringify(tc.input, null, 2)}
               </div>
               <div>
                 <span className="font-medium">Output: </span>

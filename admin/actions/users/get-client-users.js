@@ -13,7 +13,7 @@ const getAllClientUsers = async () => {
             throw new Error("No token found, unauthorized request.");
         }
 
-        const res = await axios.get(`${apiUrl}/users/get-client-users`);
+        const res = await axios.get(`${apiUrl}/users/all-client-users`);
 
         return {
             data: res.data,

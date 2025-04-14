@@ -1,25 +1,45 @@
+import {
+  FileText,
+  RefreshCw,
+  Folder
+} from "lucide-react";
+
 const problemRoutes = [
   {
-    path: "/problems/create-problem",
+    path: "/problems/add-problem",
     sideBarProps: {
       displayText: "Create Problem",
-      icon: "FileText",
+      icon: <FileText />,
     },
   },
   {
     path: "/problems/all-problems",
     sideBarProps: {
       displayText: "All Problems",
-      icon: "RefreshCw",
+      icon: <RefreshCw />,
     },
   },
   {
-    path: "/problems/problem-categories",
+    path: "/problems/approve-problem",
     sideBarProps: {
-      displayText: "Problem Categories",
-      icon: "Folder",
+      displayText: "Approve Problems",
+      icon: <Folder />,
     },
   },
+  {
+    path: "/problems/deleted-problems",
+    sideBarProps: {
+      displayText: "Deleted Problem",
+      icon: <Folder />,
+    },
+  },
+  {
+    path: "/problems/toggle",
+    sideBarProps: {
+      displayText: "Toggle Problem",
+      icon: <Folder />,
+    },
+  }
 ];
 
 export default problemRoutes;

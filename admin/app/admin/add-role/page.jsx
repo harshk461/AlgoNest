@@ -2,9 +2,11 @@
 
 import Heading from "@/components/Common/Heading";
 import MultiSelect from "@/components/Common/MultipleSelect";
-import Wrapper from "@/components/Wrapper";
+import FlexWrapper from "@/components/FlexWrapper";
+
 import axios from "axios";
 import React, { useState } from "react";
+import adminService from "../actions/AdminService";
 
 export default function Page() {
   const [role, setRole] = useState("");
@@ -15,12 +17,14 @@ export default function Page() {
     e.preventDefault();
     try {
       setLoading(true);
-      await axios.post("http://localhost:3090/roles/add-role", {
-        role,
-        permissions,
-      });
+
+      const body={role,permissions};
+
+      await adminService.addNewRole(body);
+
     } catch (err) {
       console.error(err);
+      alert(err.response.data.message);
     } finally {
       setLoading(false);
     }
@@ -35,7 +39,7 @@ export default function Page() {
   ];
 
   return (
-    <Wrapper className="flex flex-col gap-6 items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <FlexWrapper className="flex flex-col gap-6 items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <div className="w-full max-w-lg bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8">
         {/* Page Heading */}
         <Heading
@@ -96,6 +100,6 @@ export default function Page() {
           </button>
         </form>
       </div>
-    </Wrapper>
+    </FlexWrapper>
   );
 }

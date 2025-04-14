@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import MultiSelect from "@/components/Common/MultipleSelect";
-import Wrapper from "@/components/Wrapper";
+
 
 export default function CreateContestPage() {
   const [contestDetails, setContestDetails] = useState({

@@ -20,7 +20,7 @@ class TestCaseDto {
   explanation?: string;
 }
 
-export class ProblemDTO {
+export class CreateProblemDto {
   @IsNotEmpty()
   @IsString()
   question: string;
@@ -43,6 +43,7 @@ export class ProblemDTO {
   sheets: string[];
 
   @IsString()
+  @IsNotEmpty()
   descriptions: string;
 
   @IsArray()
@@ -60,5 +61,6 @@ export class ProblemDTO {
   slug: string;
 
   @IsArray()
+  @IsString({ each: true })
   hints: string[];
 }

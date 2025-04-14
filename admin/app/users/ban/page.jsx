@@ -1,16 +1,15 @@
 import { getAllClientUsers } from "@/actions/users/get-client-users";
 import Heading from "@/components/Common/Heading";
 import React from "react";
-import ClientTable from "../ClientTable";
-import Wrapper from "@/components/Wrapper";
 import FlexWrapper from "@/components/FlexWrapper";
+import Table from "@/components/TableComponent";
 
 export default async function page() {
   const { data, headers } = await getAllClientUsers({});
   return (
    <FlexWrapper>
       <Heading heading={"Ban Users"} />
-      <ClientTable
+      <Table
         data={data}
         headers={headers}
         hiddenFields={["metadata", "password", "updatedAt", "bio"]}

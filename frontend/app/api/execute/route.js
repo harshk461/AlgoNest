@@ -17,7 +17,6 @@ export async function POST(req) {
       );
     }
 
-    // ✅ Ensure 'temp' is a directory and not a file
     const tempDir = path.join(process.cwd(), "temp");
     try {
       const stat = await fs.stat(tempDir);
@@ -29,39 +28,34 @@ export async function POST(req) {
       }
     } catch (err) {
       if (err.code === "ENOENT") {
-        await fs.mkdir(tempDir, { recursive: true }); // Create if not exists
+        await fs.mkdir(tempDir, { recursive: true });
       } else {
         throw err;
       }
     }
 
-    // ✅ Define proper file paths
-    const fileName = language === "cpp" ? "main.cpp" : "script.py";
-    const filePath = path.join(tempDir, fileName);
+    let fileName;
+    if (language === "cpp") fileName = "main.cpp";
+    else if (language === "python") fileName = "script.py";
+    else if (language === "java") fileName = "Main.java";
+    else return NextResponse.json({ error: "Unsupported language" }, { status: 400 });
 
-    // ✅ Ensure we are writing to a file, not a directory
+    const filePath = path.join(tempDir, fileName);
     await fs.writeFile(filePath, code, "utf-8");
 
-    // 🐳 Docker command setup
-    const cmd =
-      language === "cpp"
-        ? ["bash", "-c", "g++ /app/main.cpp -o /app/main && /app/main"]
-        : ["python3", "/app/script.py"];
-
-    // 🐳 Create and start Docker container
     const container = await docker.createContainer({
-      Image: "code-runner", // Ensure this Docker image exists
-      Cmd: cmd,
+      Image: "code-runner",
+      Cmd: ["/app/run.sh"],
+      Env: [`LANGUAGE=${language}`],
       Volumes: { "/app": {} },
       HostConfig: {
-        Binds: [`${tempDir}:/app`], // Bind entire temp directory
+        Binds: [`${tempDir}:/app`],
       },
       Tty: false,
     });
 
     await container.start();
 
-    // 🔥 Capture execution logs
     const outputStream = await container.logs({
       stdout: true,
       stderr: true,
@@ -73,16 +67,15 @@ export async function POST(req) {
       output += chunk.toString();
     }
 
-    output = output.replace(/[\x00-\x1F\x7F]/g, ""); // Clean non-printable chars
+    output = output.replace(/[\x00-\x1F\x7F]/g, ""); // Sanitize
 
-    // ✅ Wait for execution and cleanup
     await container.wait();
     await container.remove();
-    await fs.unlink(filePath); // ✅ Ensure we remove only the file, not directory
+    await fs.unlink(filePath);
 
     return NextResponse.json({ output }, { status: 200 });
   } catch (error) {
-    console.error("Error processing request:", error.message);
+    console.error("Execution error:", error.message);
     return NextResponse.json(
       { error: "Something went wrong", details: error.message },
       { status: 500 }

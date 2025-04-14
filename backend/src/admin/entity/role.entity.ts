@@ -2,23 +2,22 @@ import {
   Entity,
   PrimaryColumn,
   Column,
-  Unique,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
+import { v4 as uuid } from 'uuid';
 
 @Entity('roles')
-@Unique(['role'])
 export class Roles {
-  @PrimaryColumn('varchar', { length: 36 })
-  id: string;
+  @PrimaryColumn('uuid')
+  id: string = uuid();
 
-  @Column('varchar', { length: 255 })
+  @Column({ type: 'varchar', length: 255 })
   role: string;
 
-  @Column('text')
-  permissions: string;
+  @Column({ type: 'simple-array' }) // or `json` if using PostgreSQL or newer MySQL
+  permissions: string[];
 
   @CreateDateColumn({ type: 'datetime', precision: 6 })
   createdAt: Date;
@@ -27,5 +26,5 @@ export class Roles {
   updatedAt: Date;
 
   @DeleteDateColumn({ type: 'datetime', precision: 6, nullable: true })
-  deletedAt: Date | null;
+  deletedAt?: Date | null;
 }

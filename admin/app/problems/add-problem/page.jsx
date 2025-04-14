@@ -62,8 +62,6 @@ export default function Page() {
   const [loading, setLoading] = useState(false);
   const navigate = useRouter();
 
-  const token = useSelector((state) => state.auth.token);
-
   const handleAddProblem = async () => {
     try {
       setLoading(true);
@@ -86,11 +84,11 @@ export default function Page() {
       await axios.post(
         "http://localhost:3090/problems/add-problem",
         problemDTO,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        // {
+        //   headers: {
+        //     Authorization: `Bearer ${token}`,
+        //   },
+        // }
       );
       navigate.replace("/all-problems");
     } catch (e) {
@@ -101,7 +99,6 @@ export default function Page() {
   };
 
   return (
-    <ProtectedRoute allowedRoles={["super-admin"]}>
       <div className="w-full h-screen flex flex-col bg-gray-900 text-gray-200">
         <Navbar />
         <div className="flex w-full h-full gap-6 p-6 overflow-hidden">
@@ -259,6 +256,5 @@ export default function Page() {
           </div>
         </div>
       </div>
-    </ProtectedRoute>
   );
 }

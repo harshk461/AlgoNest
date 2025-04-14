@@ -5,10 +5,10 @@ import React from "react";
 import problemService from "../actions/ProblemsService";
 
 export default async function page() {
-  const { data, headers } = await problemService.getDeletedProblems({});
+  const { data, headers } = await problemService.getAllApprovedProblems({});
   return (
     <FlexWrapper>
-      <Heading heading={"Deleted Problems"} />
+      <Heading heading={"Approved Problems"} />
       <Table
         data={data}
         headers={headers}

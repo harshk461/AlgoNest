@@ -1,12 +1,11 @@
-import { getAllProblems } from "@/actions/problems/get-all-problems";
 import Heading from "@/components/Common/Heading";
 import FlexWrapper from "@/components/FlexWrapper";
 import Table from "@/components/TableComponent";
-import Wrapper from "@/components/Wrapper";
 import React from "react";
+import problemService from "../actions/ProblemsService";
 
 export default async function page() {
-  const { data, headers } = await getAllProblems({});
+  const { data, headers } = await problemService.getAllApprovedProblems({});
   return (
     <FlexWrapper>
       <Heading heading={"Enable/Disable Problems"} />

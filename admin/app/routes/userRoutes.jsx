@@ -1,23 +1,45 @@
+import {
+  Users,
+  LayoutDashboard,
+  UserX,
+  Trash2,
+  Activity,
+} from "lucide-react";
+
 const userRoutes = [
   {
-    path: "/users/profile",
+    path: "/users/client-users",
     sideBarProps: {
-      displayText: "User Profile",
-      icon: "UserCircle",
+      displayText: "Client Users",
+      icon: <Users />,
     },
   },
   {
-    path: "/users/settings",
+    path: "/users/dashboard-users",
     sideBarProps: {
-      displayText: "User Settings",
-      icon: "Settings",
+      displayText: "Dashboard Users",
+      icon: <LayoutDashboard />,
     },
   },
   {
-    path: "/users/notifications",
+    path: "/users/ban",
     sideBarProps: {
-      displayText: "Notifications",
-      icon: "Bell",
+      displayText: "Banned Users",
+      icon: <UserX />,
+    },
+  },
+  {
+    path: "/users/deleted-client-users",
+    sideBarProps: {
+      displayText: "Deleted Users",
+      icon: <Trash2 />,
+    },
+  },
+  {
+    path: "/users/activity",
+    sideBarProps: {
+      displayText: "User Activity",
+      icon: <Activity />,
     },
   },
 ];

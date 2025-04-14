@@ -1,16 +1,17 @@
 import Heading from "@/components/Common/Heading";
 import Table from "@/components/TableComponent";
 import React from "react";
-import { AddUser, DeleteButton, ViewButton } from "./Buttons";
-import { getAllDashboardUsers } from "@/actions/users/get-dashboard-users";
 import FlexWrapper from "@/components/FlexWrapper";
+import userService from "../actions/UserService";
+import Link from "next/link";
 
 export default async function Page() {
-  const { data, headers } = await getAllDashboardUsers();
+  const { data, headers } = await userService.getAllClientUser();
   return (
    <FlexWrapper>
       <div className="w-full flex justify-between items-center py-4">
-        <AddUser />
+        <Link href={"/users/dashboard-users/add-user"}
+         className="px-4 py-2 rounded-lg border border-blue-500 text-blue-500 font-semibold">Add User</Link>
         <Heading heading={"All Users"} />
       </div>
       <div className="w-full overflow-auto">

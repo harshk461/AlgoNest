@@ -1,65 +1,77 @@
+import {
+  Cog,
+  Settings,
+  Bell,
+  Shield,
+  ClipboardList,
+  Archive,
+  RefreshCw,
+  Key,
+  Plug
+} from "lucide-react";
+
 const systemRoutes = [
   {
     path: "/system/settings",
     sideBarProps: {
       displayText: "System Settings",
-      icon: "Cog", // ⚙️ General settings icon
+      icon: <Cog />, // ⚙️ General settings icon
     },
   },
   {
     path: "/system/settings/general",
     sideBarProps: {
       displayText: "General Settings",
-      icon: "Settings",
+      icon: <Settings />,
     },
   },
   {
     path: "/system/settings/notifications",
     sideBarProps: {
       displayText: "Notification Settings",
-      icon: "Bell", // 🔔 Notifications icon
+      icon: <Bell />, // 🔔 Notifications icon
     },
   },
   {
     path: "/system/settings/security",
     sideBarProps: {
       displayText: "Security Settings",
-      icon: "Shield", // 🛡️ Security icon
+      icon: <Shield />, // 🛡️ Security icon
     },
   },
   {
     path: "/system/logs",
     sideBarProps: {
       displayText: "System Logs",
-      icon: "ClipboardList", // 📋 Logs icon
+      icon: <ClipboardList />, // 📋 Logs icon
     },
   },
   {
     path: "/system/backups",
     sideBarProps: {
       displayText: "Backups",
-      icon: "Archive", // 📦 Backups icon
+      icon: <Archive />, // 📦 Backups icon
     },
   },
   {
     path: "/system/updates",
     sideBarProps: {
       displayText: "System Updates",
-      icon: "RefreshCw", // 🔄 Updates icon
+      icon: <RefreshCw />, // 🔄 Updates icon
     },
   },
   {
     path: "/system/api-keys",
     sideBarProps: {
       displayText: "API Keys Management",
-      icon: "Key", // 🔑 API keys icon
+      icon: <Key />, // 🔑 API keys icon
     },
   },
   {
     path: "/system/integrations",
     sideBarProps: {
       displayText: "Integrations",
-      icon: "Plug", // 🔌 Integrations icon
+      icon: <Plug />, // 🔌 Integrations icon
     },
   },
 ];
