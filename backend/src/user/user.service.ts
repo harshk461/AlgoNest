@@ -58,23 +58,24 @@ export class UserService {
   }
 
   async addAdminUser(adminUserDto: CreateAdminUserDto): Promise<AdminUser> {
-    const role = await this.roleRepository.findOne({
-      where: { role: adminUserDto.role },
-    });
+    // const role = await this.roleRepository.findOne({
+    //   where: { role: adminUserDto.role },
+    // });
+
+    // if (!role) {
+    //   throw new Error("Role Doesn't Exists");
+    // }
 
     const hashedPassword = await bcrypt.hash(adminUserDto.password, 10);
 
     const processed_data = {
       name: adminUserDto.name,
       email: adminUserDto.email,
+      username: adminUserDto.username,
       password: hashedPassword,
       gender: adminUserDto.gender,
-      isActive: true,
-      isEmailVerified: true,
-      metadata: {
-        role: adminUserDto.role,
-        permissions: role ? role.permissions : [],
-      },
+      role: adminUserDto.role,
+      metadata: {},
     };
 
     const adminUser = this.adminUserRepository.create(processed_data);

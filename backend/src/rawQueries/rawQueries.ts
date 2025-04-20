@@ -10,21 +10,11 @@ export class RawQueries {
 
     const result = await this.dataSource.query(queryProblem, [slug]);
 
-    if (!result.length) return null;
-
-    const problemId = result[0].id;
-
-    const queryDescriptions = `
-  SELECT d.*
-  FROM descriptions d
-  WHERE d.problemId = ?;
-`;
-
-    const descriptions = await this.dataSource.query(queryDescriptions, [
-      problemId,
-    ]);
-
-    return { problem: result, descriptions };
+    const problem = {
+      ...result[0],
+      testcases: JSON.parse(result[0].testcases),
+    };
+    return { problem };
   }
 
   async getFilteredProblems(
@@ -58,6 +48,4 @@ export class RawQueries {
 
     return this.dataSource.query(sqlQuery);
   }
-
-  
 }

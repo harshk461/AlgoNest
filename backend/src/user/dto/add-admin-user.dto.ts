@@ -3,21 +3,20 @@ import {
   IsString,
   IsEmail,
   IsOptional,
-  IsBoolean,
   IsEnum,
-  IsUUID,
+  IsBoolean,
 } from 'class-validator';
 import { Gender } from '../entities/admin-user.entity';
 
 export class CreateAdminUserDto {
-  @IsUUID()
-  id: string;
-
   @IsEmail()
   email: string;
 
   @IsString()
   password: string;
+
+  @IsString()
+  username: string;
 
   @IsOptional()
   @IsString()
@@ -27,12 +26,18 @@ export class CreateAdminUserDto {
   @IsEnum(Gender)
   gender?: Gender;
 
-  @IsBoolean()
-  isEmailVerified: boolean;
-
-  @IsBoolean()
-  isActive: boolean;
-
   @IsString()
   role: string;
+
+  @IsOptional()
+  @IsBoolean()
+  isAdmin?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
+
+  @IsOptional()
+  @IsBoolean()
+  isEmailVerified?: boolean;
 }

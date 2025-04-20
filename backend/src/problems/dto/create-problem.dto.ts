@@ -51,6 +51,10 @@ export class CreateProblemDto {
   @Type(() => TestCaseDto)
   testcases: TestCaseDto[];
 
+  @IsString()
+  @IsNotEmpty()
+  output_type: string;
+
   @IsArray()
   @ArrayNotEmpty()
   @IsString({ each: true })

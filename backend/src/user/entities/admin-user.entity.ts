@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-
+import { v4 as uuid } from 'uuid';
 export enum Gender {
   MALE = 'male',
   FEMALE = 'female',
@@ -16,11 +16,14 @@ export enum Gender {
 
 @Entity({ name: 'admin_users' })
 export class AdminUser {
-  @PrimaryColumn({ type: 'varchar', length: 36 })
-  id: string;
+  @PrimaryColumn({ type: 'uuid' })
+  id: string = uuid();
 
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
+
+  @Column({ unique: true, nullable: false })
+  username: string;
 
   @Column({ type: 'varchar', length: 255 })
   password: string;
@@ -32,13 +35,16 @@ export class AdminUser {
   gender?: Gender;
 
   @Column({ type: 'tinyint', default: 0 })
-  isEmailVerified: boolean;
+  isEmailVerified?: boolean;
 
   @Column({ type: 'tinyint', default: 1 })
-  isActive: boolean;
+  isActive?: boolean;
 
   @Column({ type: 'json', nullable: true })
   metadata?: Record<string, any>;
+
+  @Column({ nullable: true })
+  role: string;
 
   @CreateDateColumn({ type: 'datetime', precision: 6 })
   createdAt: Date;

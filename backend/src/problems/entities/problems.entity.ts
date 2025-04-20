@@ -34,6 +34,9 @@ export class Problem {
   @Column({ type: 'json' })
   testcases: any;
 
+  @Column({ type: 'varchar' })
+  output_type: string;
+
   @Column({ type: 'text' })
   constraints: string;
 
