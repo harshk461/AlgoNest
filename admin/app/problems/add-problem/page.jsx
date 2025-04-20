@@ -23,11 +23,13 @@ export default function Page() {
   const [desc, setDesc] = useState("");
   const [descriptions, setDescriptions] = useState([]);
 
+  const [outputType, setOutputType] = useState("");
   const [tsc, setTsc] = useState({
-    inputs: [{ key: "", value: "" }], // Ensure this is an array
+    inputs: [{ key: "", type: "", value: "" }],
     output: "",
     explanation: "",
   });
+
   const [testcases, setTestcases] = useState([]);
 
   const [cons, setCons] = useState("");
@@ -77,10 +79,12 @@ export default function Page() {
           output,
           explanation: explanation || undefined,
         })),
+        output_type:outputType,
         constraints,
         slug,
         hints,
       };
+      console.log(problemDTO);
       await axios.post(
         "http://localhost:3090/problems/add-problem",
         problemDTO,
@@ -92,7 +96,7 @@ export default function Page() {
       );
       navigate.replace("/all-problems");
     } catch (e) {
-      console.error(e);
+      console.log(e);
     } finally {
       setLoading(false);
     }
@@ -135,6 +139,8 @@ export default function Page() {
               setTsc={setTsc}
               testcases={testcases}
               setTestcases={setTestcases}
+              outputType={outputType}
+              setOutputType={setOutputType}
             />
 
             {/* Constraints */}

@@ -5,30 +5,32 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
-import { X, AlertCircle, CheckCircle,Save, UserPlus } from "lucide-react";
+import { X, AlertCircle, CheckCircle, Save, UserPlus } from "lucide-react";
 import { Controller } from "react-hook-form";
-
 
 // Validation schema using Yup
 const validationSchema = yup.object().shape({
-  email: yup.string().email("Enter a valid email").required("Email is required"),
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
   password: yup
     .string()
     .required("Password is required")
     .min(8, "Password should be at least 8 characters"),
   username: yup.string().required("Username is required"),
-  firstName: yup.string().required("First name is required"),
-  lastName: yup.string().required("Last name is required"),
-  role: yup.string().oneOf(["user", "admin", "instructor"]).required("Role is required"),
-  isAdmin: yup.boolean().default(true),
-  isActive: yup.boolean().default(true),
+  name: yup.string().required("Name is Required"),
+  role: yup
+    .string()
+    .oneOf(["user", "admin", "instructor"])
+    .required("Role is required"),
 });
 
 export default function page() {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const apiUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
   const {
     control,
     handleSubmit,
@@ -48,8 +50,8 @@ export default function page() {
     setLoading(true);
     try {
       // API call to create admin user
-      const response = await axios.post("/api/admin/users", data);
-      
+      const response = await axios.post(`${apiUrl}/users/add-admin-user`, data);
+
       setSuccessMessage("Admin user created successfully!");
       reset(); // Reset form after successful submission
     } catch (error) {
@@ -71,36 +73,19 @@ export default function page() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <FormHeader 
-        title="Create Admin User" 
-        icon={<UserPlus className="h-6 w-6" />} 
+      <FormHeader
+        title="Create Admin User"
+        icon={<UserPlus className="h-6 w-6" />}
       />
 
       <div className="backdrop-blur-lg bg-gradient-to-br from-gray-900/80 to-blue-900/30 rounded-lg shadow-md p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Basic Information */}
-            <FormSection 
-              title="Basic Information" 
+            <FormSection
+              title="Basic Information"
               className="col-span-1 md:col-span-2"
             />
-
-            <TextInput
-              name="firstName"
-              label="First Name"
-              control={control}
-              errors={errors}
-              required
-            />
-
-            <TextInput
-              name="lastName"
-              label="Last Name"
-              control={control}
-              errors={errors}
-              required
-            />
-
             <TextInput
               name="email"
               label="Email"
@@ -128,15 +113,15 @@ export default function page() {
             />
 
             <TextInput
-              name="fullName"
+              name="name"
               label="Full Name (Optional)"
               control={control}
               errors={errors}
             />
 
             {/* Additional Information */}
-            <FormSection 
-              title="Additional Information" 
+            <FormSection
+              title="Additional Information"
               className="col-span-1 md:col-span-2"
             />
 
@@ -148,20 +133,20 @@ export default function page() {
                 { value: "", label: "Select Gender" },
                 { value: "male", label: "Male" },
                 { value: "female", label: "Female" },
-                { value: "other", label: "Other" }
+                { value: "other", label: "Other" },
               ]}
             />
-
+            {/* 
             <TextInput
               name="profilePicture"
               label="Profile Picture URL"
               control={control}
               errors={errors}
-            />
+            /> */}
 
             {/* Role and Status */}
-            <FormSection 
-              title="Role and Status" 
+            <FormSection
+              title="Role and Status"
               className="col-span-1 md:col-span-2"
             />
 
@@ -173,30 +158,10 @@ export default function page() {
               options={[
                 { value: "admin", label: "Admin" },
                 { value: "instructor", label: "Instructor" },
-                { value: "user", label: "User" }
+                { value: "user", label: "User" },
               ]}
               required
             />
-
-            <div className="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-4">
-              <CheckboxInput
-                name="isAdmin"
-                label="Admin Privileges"
-                control={control}
-              />
-
-              <CheckboxInput
-                name="isActive"
-                label="Active Account"
-                control={control}
-              />
-
-              <CheckboxInput
-                name="isEmailVerified"
-                label="Email Verified"
-                control={control}
-              />
-            </div>
 
             <ButtonGroup
               loading={loading}
@@ -208,13 +173,13 @@ export default function page() {
       </div>
 
       {/* Success/Error messages */}
-      <AlertMessage 
+      <AlertMessage
         type="success"
         message={successMessage}
         onClose={handleCloseAlert}
       />
 
-      <AlertMessage 
+      <AlertMessage
         type="error"
         message={errorMessage}
         onClose={handleCloseAlert}
@@ -222,7 +187,6 @@ export default function page() {
     </div>
   );
 }
-
 
 function FormHeader({ title, icon }) {
   return (
@@ -233,25 +197,21 @@ function FormHeader({ title, icon }) {
   );
 }
 
-
 function FormSection({ title, className }) {
   return (
     <div className={className}>
-      <h2 className="text-lg font-semibold mb-4 border-b pb-2 mt-4">
-        {title}
-      </h2>
+      <h2 className="text-lg font-semibold mb-4 border-b pb-2 mt-4">{title}</h2>
     </div>
   );
 }
 
-
-function TextInput({ 
-  name, 
-  label, 
-  control, 
-  errors, 
-  type = "text", 
-  required = false 
+function TextInput({
+  name,
+  label,
+  control,
+  errors,
+  type = "text",
+  required = false,
 }) {
   return (
     <div className="col-span-1">
@@ -260,18 +220,18 @@ function TextInput({
         control={control}
         render={({ field }) => (
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {label} {required && <span className="text-red-500">*</span>}
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              {label} {required && <span className="text-red-400">*</span>}
             </label>
             <input
               {...field}
               type={type}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                errors[name] ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-gray-800 text-gray-200 ${
+                errors[name] ? "border-red-500" : "border-gray-700"
+              } hover:border-gray-500 transition-colors`}
             />
             {errors[name] && (
-              <p className="mt-1 text-sm text-red-600">
+              <p className="mt-1 text-sm text-red-400">
                 {errors[name].message}
               </p>
             )}
@@ -282,13 +242,13 @@ function TextInput({
   );
 }
 
-function SelectInput({ 
-  name, 
-  label, 
-  control, 
-  errors, 
+function SelectInput({
+  name,
+  label,
+  control,
+  errors,
   options,
-  required = false 
+  required = false,
 }) {
   return (
     <div className="col-span-1">
@@ -297,23 +257,27 @@ function SelectInput({
         control={control}
         render={({ field }) => (
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              {label} {required && <span className="text-red-500">*</span>}
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              {label} {required && <span className="text-red-400">*</span>}
             </label>
             <select
               {...field}
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                errors && errors[name] ? "border-red-500" : "border-gray-300"
-              }`}
+              className={`w-full px-3 py-2 border rounded-md bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400 ${
+                errors && errors[name] ? "border-red-500" : "border-gray-700"
+              } hover:border-gray-500 transition-colors`}
             >
               {options.map((option) => (
-                <option key={option.value} value={option.value}>
+                <option
+                  key={option.value}
+                  value={option.value}
+                  className="bg-gray-800 text-gray-200"
+                >
                   {option.label}
                 </option>
               ))}
             </select>
             {errors && errors[name] && (
-              <p className="mt-1 text-sm text-red-600">
+              <p className="mt-1 text-sm text-red-400">
                 {errors[name].message}
               </p>
             )}
@@ -340,10 +304,7 @@ function CheckboxInput({ name, label, control }) {
               {...field}
               className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
             />
-            <label
-              htmlFor={name}
-              className="ml-2 text-sm text-gray-700"
-            >
+            <label htmlFor={name} className="ml-2 text-sm">
               {label}
             </label>
           </div>
@@ -352,7 +313,6 @@ function CheckboxInput({ name, label, control }) {
     </div>
   );
 }
-
 
 function ButtonGroup({ loading, onReset, className }) {
   return (
@@ -402,14 +362,17 @@ function ButtonGroup({ loading, onReset, className }) {
   );
 }
 
-
 function AlertMessage({ type, message, onClose }) {
   if (!message) return null;
 
   const isSuccess = type === "success";
-  
+
   return (
-    <div className={`fixed bottom-4 right-4 ${isSuccess ? "bg-green-50 border-green-500" : "bg-red-50 border-red-500"} border-l-4 p-4 rounded shadow-lg max-w-md`}>
+    <div
+      className={`fixed bottom-4 right-4 ${
+        isSuccess ? "bg-green-50 border-green-500" : "bg-red-50 border-red-500"
+      } border-l-4 p-4 rounded shadow-lg max-w-md`}
+    >
       <div className="flex items-start">
         {isSuccess ? (
           <CheckCircle className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />

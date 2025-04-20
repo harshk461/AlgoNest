@@ -24,6 +24,28 @@ class UserService{
         }
     }
 
+    async getAllAdminUsers(){
+        try{
+            const response=await axios.get(`${apiUrl}/users/all-admin-users`);
+
+            const responseData = response.data;
+
+            if (responseData.length === 0) {
+                return { data: [], headers: [] };
+            } else {
+                const extractedHeaders = Object.keys(responseData[0]).map((key) => ({
+                    key,
+                    label: key.toUpperCase(),
+                }));
+
+                return { data: responseData, headers: extractedHeaders };
+            }
+        }
+        catch(err){
+            throw err;
+        }
+    }
+
      async getAllDeletedClientUser(){
         try{
             const response=await axios.get(`${apiUrl}/users/all-deleted-client-users`);
